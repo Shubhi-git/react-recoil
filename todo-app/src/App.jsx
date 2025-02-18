@@ -1,11 +1,24 @@
+import React from 'react';
+import { useSetRecoilState } from 'recoil';
+import { todoListState } from './state';
+import TodoInput from './todoInput';
+import TodoList from './todoList';
+import './App.css'
 
-function App() {
+const App = () => {
+  const setTodoList = useSetRecoilState(todoListState);
+
+  const addTodo = (todo) => {
+    setTodoList((oldList) => [...oldList, todo]);
+  };
 
   return (
-    <>
-      <h1>This is todo app project using recoil concept</h1>
-    </>
-  )
-}
+    <div>
+      <h1>Todo App</h1>
+      <TodoInput addTodo={addTodo} />
+      <TodoList />
+    </div>
+  );
+};
 
-export default App
+export default App;
